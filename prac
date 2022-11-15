@@ -108,3 +108,72 @@ prac 7
       select * from audit1; 
       
  
+ 
+ 
+ MONGODB
+ 
+ MongoDb practical 1: -
+Creating database: 
+Use database_name 
+
+See the database : db 
+
+Creating collection: - 
+db.createCollection(‘Collection_Name ’)
+
+deleting  complete collection: - 
+db.collection_Name.drop() 
+
+inserting in a collection: --
+db.Collection_Name.insert({Name: ‘Prathmesh’, Roll: 4}) 
+
+remove particular row: - 
+db.Collection_Name.remove({Name: ‘Prathmesh’}) 
+
+show entries in collection: -- 
+db.Collection_Name.find().pretty() 
+
+update operations: = 
+1.	Set particular value:-
+db.collection_Name.update({Name:’Prathmesh’}, {$set: {Roll:7}}) 
+2.	Rename field name: -  
+db.collection_Name.update({Name:’Prathmesh’}, {$rename: {Roll: ‘Roll_No’}}) 
+3.	Increment operator-  
+db.collection_Name.update({Name:’Prathmesh’}, {$inc: {Roll: 2}})  
+
+logical operators: - 
+1.	And: -
+ db.collection_Name.find({$and: [{Name:’Prathmesh’},{Roll:2}]}) 
+2.	OR
+db.collection_Name.find({$or: {[{Name:’Prathmesh’},{Roll:2}]}) 
+
+SAVE method:  
+Db.collection_Name.save(_id: ObjectId(‘Object_id_here’), {Name: ‘Prathmesh’, roll:5})
+
+
+MongoDb pr 2: -
+1.	Indexing: - 
+Creating index- 
+Db.collection_name.createIndex({Name:1}) 
+Show indexes: - 
+Db.collection_name.getIndexes() 
+
+Setting primary key in indexes: -
+db.index.ensureIndex({roll:1},{unique:true}) 
+
+and operation: -
+db.index.remove({$and: [{Name: 'Tejas'}, {marks: 80}]}) 
+
+2.	Aggreagtion:  
+
+1.	Finding max marks:- 
+db.Collection_Name.aggregate([{$group: {_id: '$Subject', Max_Marks: {$max: '$marks'}}}])
+db.collection_name.aggregate([{$group: {_id: ‘subject’, Max_Marks: {$max: ‘$Marks’}}}])   
+
+
+Mongodb Practical 3: -  
+2 phases : -
+Map – processes each document In the collection 
+Reduce- combines the output of map operation
+db.map_r.mapReduce(function() {emit(this.Name, this.Marks)}, function(key,value){return Array.avg(value)}, {out: 'MyOUTPUT'}) 
+
